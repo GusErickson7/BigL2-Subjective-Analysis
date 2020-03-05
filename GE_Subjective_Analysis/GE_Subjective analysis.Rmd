@@ -1,0 +1,47 @@
+---
+title: "Initial_Analysis_2"
+author: Gus Ericson
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Install and Load Packages into R
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:/Users/RA/Desktop/AAA Lab/Subjective Analysis 2020/GE_Subjective_Analysis")
+library(tidyverse)
+library(stringr)
+library(data.table)
+library(readr)
+library(lme4)
+library(apaTables)
+library(ggpubr)
+library(corrplot)
+library(Hmisc)
+```
+
+```{r, warning=FALSE} 
+# Import Dataset via Environment
+Table1 <- read.csv(file = "InitialAnalysis2.csv", skip = 1) %>%
+  rename(Participant = X,
+         Counterbalance = X.1,
+         RA = X.2
+         ) %>%
+  select(Participant,
+         Counterbalance,
+         redcap_event_name,
+         Cadillac,
+         Nissan,
+         Tesla,
+         Volvo,
+         Nervousness:Inattention,
+         Nervousness.1:Inattention.1,
+         Nervousness.2:Inattention.2,
+         Nervousness.3:Inattention.3,
+         auto80panas_unrelated_14,
+         auto15panas_unrelated_14,
+         manual80panas_unrelated_14,
+         manual15panas_unrelated_14) %>%
+Table1$redcap_event_name <- recode(Table1$redcap_event_name, 1 = "Cadillac", 2 = "N", 3 = "T", 4 = "V")
+
+```
+
